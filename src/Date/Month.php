@@ -108,12 +108,18 @@ class Month
     /**
      * Checks that number is positive.
      *
-     * @param $number
+     * @param int $number
      * @throws \InvalidArgumentException
      */
     private function ensurePositiveNumber($number)
     {
-        if (ctype_digit($number) && $number < 0) {
+        $number = filter_var($number, FILTER_VALIDATE_INT);
+
+        if ($number === false) {
+            throw new \InvalidArgumentException('number must be numeric integer value');
+        }
+
+        if ($number < 0) {
             throw new \InvalidArgumentException('number can not be lower than 0');
         }
     }
