@@ -55,7 +55,7 @@ class Month
     public function addMonth($number = 1)
     {
         $this->ensurePositiveNumber($number);
-        $this->datetime->modify("+ $number month");
+        $this->datetime->modify('+' . $number . ' month');
     }
 
     /**
@@ -66,7 +66,7 @@ class Month
     public function subMonth($number = 1)
     {
         $this->ensurePositiveNumber($number);
-        $this->datetime->modify("- $number month");
+        $this->datetime->modify('-' . $number . ' month');
     }
 
     /**
@@ -77,7 +77,7 @@ class Month
     public function addYear($number = 1)
     {
         $this->ensurePositiveNumber($number);
-        $this->datetime->modify("+ $number year");
+        $this->datetime->modify('+' . $number . ' year');
     }
 
     /**
@@ -88,7 +88,7 @@ class Month
     public function subYear($number = 1)
     {
         $this->ensurePositiveNumber($number);
-        $this->datetime->modify("- $number year");
+        $this->datetime->modify('-' . $number . ' year');
     }
 
     /**
@@ -109,7 +109,10 @@ class Month
      * Checks that number is positive.
      *
      * @param int $number
+     *
      * @throws \InvalidArgumentException
+     *
+     * @return void
      */
     private function ensurePositiveNumber($number)
     {
@@ -119,7 +122,7 @@ class Month
             throw new \InvalidArgumentException('number must be numeric integer value');
         }
 
-        if ($number < 1) {
+        if ($number < 0) {
             throw new \InvalidArgumentException('number can not be lower than 0');
         }
     }
