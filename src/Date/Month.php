@@ -54,10 +54,8 @@ class Month
      */
     public function addMonth($number = 1)
     {
-        if ($number < 0) {
-            throw new \InvalidArgumentException('number can not be lower than 0');
-        }
-        $this->datetime->modify('+' . (int)$number . ' month');
+        $this->ensurePositiveNumber($number);
+        $this->datetime->modify("+ $number month");
     }
 
     /**
@@ -67,10 +65,8 @@ class Month
      */
     public function subMonth($number = 1)
     {
-        if ($number < 0) {
-            throw new \InvalidArgumentException('number can not be lower than 0');
-        }
-        $this->datetime->modify('-' . (int)$number . ' month');
+        $this->ensurePositiveNumber($number);
+        $this->datetime->modify("- $number month");
     }
 
     /**
@@ -80,10 +76,8 @@ class Month
      */
     public function addYear($number = 1)
     {
-        if ($number < 0) {
-            throw new \InvalidArgumentException('number can not be lower than 0');
-        }
-        $this->datetime->modify('+' . (int)$number . ' year');
+        $this->ensurePositiveNumber($number);
+        $this->datetime->modify("+ $number year");
     }
 
     /**
@@ -93,10 +87,8 @@ class Month
      */
     public function subYear($number = 1)
     {
-        if ($number < 0) {
-            throw new \InvalidArgumentException('number can not be lower than 0');
-        }
-        $this->datetime->modify('-' . (int)$number . ' year');
+        $this->ensurePositiveNumber($number);
+        $this->datetime->modify("- $number year");
     }
 
     /**
@@ -111,5 +103,18 @@ class Month
         $yd = $this->getYear() - $month->getYear();
         $md = $this->getMonth() - $month->getMonth();
         return ($yd * 12 + $md) * -1;
+    }
+
+    /**
+     * Checks that number is positive.
+     *
+     * @param $number
+     * @throws \InvalidArgumentException
+     */
+    private function ensurePositiveNumber($number)
+    {
+        if (ctype_digit($number) && $number < 0) {
+            throw new \InvalidArgumentException('number can not be lower than 0');
+        }
     }
 }
