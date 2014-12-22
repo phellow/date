@@ -119,7 +119,7 @@ class Month
             throw new \InvalidArgumentException('number must be numeric integer value');
         }
 
-        if ($number < 0) {
+        if ($number < 1) {
             throw new \InvalidArgumentException('number can not be lower than 0');
         }
     }
